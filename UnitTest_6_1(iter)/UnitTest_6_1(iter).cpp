@@ -14,12 +14,10 @@ namespace UnitTest61iter
 		{
 			const int n = 1;
 			int a[n];
-			int S = 0;
-			int z = 0;
 			a[0] = 13;
 
-			Search(a, n, z, S);
-			Assert::AreEqual(S, 0);
+			Replace(a, n);
+			Assert::AreEqual(a[0], 13);
 		}
 	};
 }

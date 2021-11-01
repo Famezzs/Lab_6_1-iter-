@@ -12,12 +12,10 @@ using std::cout;
 using std::endl;
 using std::setw;
 
-void CreateRandArray(int *a, const int LeftLimit, const int RightLimit, const int size);
-void PrintArray(int *a, const int size);
-void Search(int *a, const int size, int &numbofel, int &S);
-void Replace(int *a, const int number);
-void Sum(const int element, int &S);
-void PrintReplResult( const int S, const int numbofel);
+void CreateArray(int *c, const int LeftLimit, const int RightLimit, const int size);
+void PrintArray(int *c, const int size);
+void Sum(int* c, const int size);
+void Replace(int *c, const int size);
 
 int main()
 {
@@ -27,61 +25,57 @@ int main()
 	int B = 85;
 	const int n = 21;
 	int c[n];
-	int S = 0; // сума елементів, що замінюються нулем
-	int z = 0; // кількість елементів, що замінюються нулем
 
-	CreateRandArray(c, A, B, n);
+	CreateArray(c, A, B, n);
 	PrintArray(c, n);
-	Search(c, n, z, S);
-	PrintArray(c, n);
-	PrintReplResult(S, z);
+	Sum(c, n);
+	Replace(c, n);
 }
 
-void CreateRandArray(int *a, const int LeftLimit, const int RightLimit, const int size)
+void CreateArray(int *c, const int LeftLimit, const int RightLimit, const int size)
 {
 	for (int i = 0; i < size; i++)
 	{
-		a[i] = LeftLimit + rand() % (RightLimit - LeftLimit + 1);
+		c[i] = LeftLimit + rand() % (RightLimit - LeftLimit + 1);
 	}
 }
 
-void PrintArray(int *a, const int size)
+void PrintArray(int *c, const int size)
 {
 	cout << "c = " << "{";
 	for (int i = 0; i < size; i++)
 	{
-		cout << setw(4) << a[i];
+		cout << setw(4) << c[i];
 		if (i != size - 1)
 			cout << ",";
 	}
-	cout << " }" << endl;
+	cout << " }\n" << endl;
 }
 
-void Search(int *a, const int size, int &numbofel, int &S)
+void Replace(int *c, const int size)
 {
 	for (int i = 0; i < size; i++)
 	{
-		if (a[i] % 2 && a[i] % 13 != 0)
+		if (c[i] % 2 && c[i] % 13 != 0)
+			c[i] = 0;
+	}
+
+	PrintArray(c, size);
+}
+
+void Sum(int *c, const int size)
+{
+	int S = 0;
+	int n = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (c[i] % 2 && c[i] % 13 != 0)
 		{
-			Sum(a[i], S);
-			Replace(a, i);
-			numbofel++;
+			S += c[i];
+			n++;
 		}
 	}
-}
 
-void Sum(const int element, int &S)
-{
-	S += element;
-}
-
-void PrintReplResult(const int S, const int numbofel)
-{
-	cout << "Sum of replaced elements = " << S << endl;
-	cout << "Number of replaced elements = " << numbofel << endl;
-}
-
-void Replace(int *a, const int number)
-{
-	a[number] = 0;
+	cout << "Sum of elements to be replaced = " << S << endl;
+	cout << "Number of elements to be replaced = " << n << endl << endl;
 }

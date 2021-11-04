@@ -62,9 +62,9 @@ void PrintArray(int *c, const int size)
 
 void Replace(int *c, const int size)
 {
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < size; i++) 
 	{
-		if (c[i] % 2 && i % 13 != 0)
+		if (!(c[i] % 2 == 0 || i % 13 == 0))
 			c[i] = 0;
 	}
 }
@@ -73,7 +73,7 @@ void Sum(int *c, const int size, int &S, int &Number)
 {
 	for (int i = 0; i < size; i++)
 	{
-		if (c[i] % 2 && i % 13 != 0)
+		if (!(c[i] % 2 == 0 || i % 13 == 0))
 		{
 			S += c[i];
 			Number++;
